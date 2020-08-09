@@ -1,0 +1,68 @@
+import React, { Component } from 'react'
+import '../styles/App.scss'
+// hooks, use a functional component
+
+
+class Todolist extends Component {
+  state = {
+    text:'',
+    items:['one', 'two', 'three'] // Cannot push array item to state directly
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    if (this.state.text ==='') {
+      alert('Please enter something');
+    } else {
+        this.setState({
+            items: this.state.items.concat(this.state.text)
+        })
+    }
+  }
+
+  // onChange is required by the input field to fire off the users input
+  onChange = (e) => this.setState({[e.target.name]: e.target.value});
+
+  render() {
+    // console.log("added: " + e.target.value);
+    return (
+    <div>
+        <div className="row d-flex justify-content-center">
+          <form onSubmit={this.onSubmit}>
+              <input 
+                    placeholder="What's going on?"
+                    name="text"
+                    type="text" 
+                    className="form-control" 
+                    aria-label="Default" 
+                    aria-describedby="inputGroup-sizing-default"
+                    onfocus="this.value=''"
+                    autocomplete="off"
+                    value={this.state.text} 
+                    onChange={this.onChange} 
+                />
+              {/* <input placeholder="add item" type="text" name="text" value={this.state.text} onChange={this.onChange}/> */}
+              <span>
+              <label>
+                <input className="input--add-item" type="submit" value="Add" />
+              </label>
+              </span>
+            
+          </form>
+
+        </div>
+        <div className="row d-flex justify-content-center list--wrapper">
+            <ul>
+                {this.state.items.map(item => (
+                    <li className="list--item" key={item}>{item}</li>
+                )).reverse()}
+            </ul>
+        </div>
+    </div>
+  
+    )
+  }
+}
+
+
+export default Todolist;

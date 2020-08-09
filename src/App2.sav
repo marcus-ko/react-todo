@@ -1,38 +1,26 @@
 import React, { Component } from 'react'
 import './styles/App.scss'
+// import Todolist from './components/Todolist';
 // hooks, use a functional component
 
 
 class App extends Component {
+  state = {
+    text:'',
+    todos:['apple', 'milk', 'cheese'] // Cannot push array item to state directly
+  };
 
-  constructor(props) {
-    super(props);
- 
-    this.state = {
-      text:'',
-      items: ['apple', 'milk', 'yogurt']
-    };
-    this.removeTodo = this.removeTodo.bind(this);
-  }
-
-  removeTodo(index){
-    this.setState({
-        items: this.state.items.filter(el => el !== index)
+  // removeItem (index) {
+  //   const itemsClone = [...this.state.items];
+  //   itemsClone.splice(1)
+  //   this.setState({ itemsClone })
+  // }
+  removeItem (index) {
+    const todos = this.state.todos.filter((item, todoIndex) => {
+      return todoIndex !== index
     })
+    this.setState({ todos })
   }
-
-  // clearText() {
-  //   return {
-      
-  //   }
-  // }
-  // clearInput () {
-  //   this.setState(state => ({
-  //     this.state.text
-  //   }))
-  // }
-
-
 
 
   onSubmit = e => {
@@ -41,8 +29,7 @@ class App extends Component {
       alert('Please enter something');
     } else {
         this.setState({
-            items: this.state.items.concat(this.state.text),
-            text: ''
+            todos: this.state.todos.concat(this.state.text)
         })
     }
   }
@@ -51,41 +38,39 @@ class App extends Component {
   onChange = (e) => this.setState({[e.target.name]: e.target.value});
 
   render() {
+    // console.log("added: " + e.target.value);
     return (
-        <div className="row justify-content-center">
+    <div className="row justify-content-center">
         <div className="">
           <form onSubmit={this.onSubmit}>
           <div className="input-group mb-3">
+            
+
               <input 
-                    placeholder="item..."
+                    placeholder="What's going on?"
                     name="text"
                     type="text" 
                     className="form-control" 
                     aria-label="Default" 
                     aria-describedby="basic-addon2"
+                    // onFocus={()=> "this.value=''"}
                     autoComplete="off"
                     value={this.state.text} 
                     onChange={this.onChange} 
                 />
 
-                <div className="input-group-prepend">
+              <div className="input-group-prepend">
                 <button className="btn btn-outline-secondary" type="submit" value="Add">Submit</button>
               </div>
+              
+              {/* <input placeholder="add item" type="text" name="text" value={this.state.text} onChange={this.onChange}/> */}
               </div>
 
             
           </form>
-          <div className="list--wrapper">
-            <ul>
-                {this.state.items.map(item => (
-                    <li className="list--item" onClick={() => { this.removeTodo(item)}} key={item}>{item}</li>
-                )).reverse()}
-                </ul>
+          <Todolist todos={this.state.todos} removeItem={this.removeItem}/>
         </div>
-        </div>
-
-
-
+        
     </div>
   
     )
