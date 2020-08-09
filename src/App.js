@@ -21,20 +21,6 @@ class App extends Component {
     })
   }
 
-  // clearText() {
-  //   return {
-      
-  //   }
-  // }
-  // clearInput () {
-  //   this.setState(state => ({
-  //     this.state.text
-  //   }))
-  // }
-
-
-
-
   onSubmit = e => {
     e.preventDefault();
     if (this.state.text ==='') {
@@ -83,8 +69,6 @@ class App extends Component {
                 </ul>
         </div>
         </div>
-
-
 
     </div>
   
