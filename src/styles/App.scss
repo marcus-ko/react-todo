@@ -12,11 +12,20 @@ body {
 }
 
 /* button */
-.btn {
-  background-color: #11D100;
-  color: #fff;
-  border: none;
+.input-group-prepend {
+  .btn {
+    background-color: #11D100;
+    color: #fff;
+    border: none;
+  
+    &.btn-outline-secondary {
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      border-top-left-radius: 0px;
+    }
+  }
 }
+
 /* input */
 .input--add-item {
   margin: 1rem;

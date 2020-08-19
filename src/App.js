@@ -10,15 +10,16 @@ class App extends Component {
  
     this.state = {
       text:'',
-      items: ['apple', 'milk', 'yogurt']
+      items: []
     };
-    this.removeTodo = this.removeTodo.bind(this);
+    this.removeItem = this.removeItem.bind(this);
   }
 
-  removeTodo(index){
+  removeItem(index){
     this.setState({
-        items: this.state.items.filter(el => el !== index)
+        items: this.state.items.filter(element => element !== index)
     })
+    console.log(index);
   }
 
   onSubmit = e => {
@@ -27,8 +28,7 @@ class App extends Component {
       alert('Please enter something');
     } else {
         this.setState({
-            items: this.state.items.concat(this.state.text),
-            text: ''
+            items: this.state.items.concat(this.state.text)
         })
     }
   }
@@ -50,6 +50,9 @@ class App extends Component {
                     aria-label="Default" 
                     aria-describedby="basic-addon2"
                     autoComplete="off"
+                    onFocus = {(e) => e.target.placeholder = ''}
+                    // onFocus = {(e) => e.target.value = ''}
+                    onBlur = {(e) => e.target.placeholder = 'item...'}
                     value={this.state.text} 
                     onChange={this.onChange} 
                 />
@@ -63,8 +66,8 @@ class App extends Component {
           </form>
           <div className="list--wrapper">
             <ul>
-                {this.state.items.map(item => (
-                    <li className="list--item" onClick={() => { this.removeTodo(item)}} key={item}>{item}</li>
+                {this.state.items.map((item) => (
+                    <li className="list--item" onClick={() => { this.removeItem(item)}} key={item}>{item}</li>
                 )).reverse()}
                 </ul>
         </div>
