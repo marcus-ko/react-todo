@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './styles/App.scss'
-// hooks, use a functional component
 
 
 class App extends Component {
@@ -51,7 +50,6 @@ class App extends Component {
                     aria-describedby="basic-addon2"
                     autoComplete="off"
                     onFocus = {(e) => e.target.placeholder = ''}
-                    // onFocus = {(e) => e.target.value = ''}
                     onBlur = {(e) => e.target.placeholder = 'item...'}
                     value={this.state.text} 
                     onChange={this.onChange} 
