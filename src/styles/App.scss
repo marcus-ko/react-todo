@@ -57,6 +57,10 @@ li {
         transition: 0.3s;
       }
     }
+    li.list--item.fadeOut {
+      transition: all 1s ease-in-out;
+      opacity: 0;
+    }
   }
     
 }

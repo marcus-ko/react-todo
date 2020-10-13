@@ -9,15 +9,19 @@ class App extends Component {
  
     this.state = {
       text:'',
-      items: []
+      items: ["apple", "orange", "pear"]
     };
     this.removeItem = this.removeItem.bind(this);
+  }
+  toggle() {
+    this.setState({active: !this.state.active});
   }
 
   removeItem(index){
     this.setState({
         items: this.state.items.filter(element => element !== index)
     })
+    this.setState(prevState => ({ active: !prevState.active }));
     console.log(index);
   }
 
@@ -29,11 +33,17 @@ class App extends Component {
         this.setState({
             items: this.state.items.concat(this.state.text)
         })
+        this.setState({
+          text: ''
+        });
     }
   }
 
   // onChange is required by the input field to fire off the users input
   onChange = (e) => this.setState({[e.target.name]: e.target.value});
+  // onChange = (e) => this.setState({
+  //   text: ''
+  // });
 
   render() {
     return (
@@ -65,7 +75,9 @@ class App extends Component {
           <div className="list--wrapper">
             <ul>
                 {this.state.items.map((item) => (
-                    <li className="list--item" onClick={() => { this.removeItem(item)}} key={item}>{item}</li>
+                    <li className="list--item" onClick={() => { this.removeItem(item)}} key={item}>{item}
+                      <button type="button" className="close">×</button>
+                    </li>
                 )).reverse()}
                 </ul>
         </div>
@@ -76,6 +88,5 @@ class App extends Component {
     )
   }
 }
-
 
 export default App;
