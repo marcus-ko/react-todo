@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './styles/App.scss'
-
+var ReactCSSTransitionGroup = require('react-transition-group');
 
 class App extends Component {
 
